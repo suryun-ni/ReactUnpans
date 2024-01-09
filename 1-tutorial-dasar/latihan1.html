@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Hello World</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!-- Don't use this in production: -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">        
+    const container = document.getElementById("root");
+    const root = ReactDOM.createRoot(container);
+    
+    //props untuk properti atau mirip seperti argumen
+    function Header(props) {
+        return (<h1>Belajar React Bareng {props.name} 🚀</h1>)
+    }
+
+    //Komponen bersarang
+    function HomePage(){
+        //Menggunkan Kembali Komponen
+        return(
+                <>
+         <Header name = "WPU"/>
+         <Header name = "Pak DIka " />
+                </>
+            );   
+    }
+
+   
+   //PROPS REFACTOR 
+   
+   function Content( {name} ) {
+    //Pakai ternary
+    return (<h1>Belajar React Bareng {name ? name : 'Tengku'} 🚀</h1>)
+}
+
+//Komponen bersarang
+function MainPage(){
+    //Menggunkan Kembali Komponen
+    return(
+            <>
+     <Content />
+     <Content name = "Tes Ternary" />
+            </>
+        );   
+}
+
+// ELEMEN BERULANG 
+   
+function MyList() {
+    const students = ['Bro', 'Mahmed','Mahmud'];
+    return(
+        <>
+        <ul>
+            { students.map((student) => (
+                    <li key={student}>{student}</li>
+    ))
+            }
+        </ul>
+        </>
+    )
+}
+
+
+// STATE &HOOKS & EVENT HANDLER
+   
+function MyState() {
+    //state
+    const [number, setNumber] = React.useState(0);
+    
+
+  
+        //Update Function
+        function handleAdd(){
+            setNumber(number + 1);
+        }
+
+        function handleMinus(){
+            setNumber(number - 1);
+        }
+        function HandleRender(){
+            return (<span> {number} </span>)
+        }
+        function HandleReset(){
+            setNumber(0)
+        }
+       
+        return (
+            <>
+            <button onClick={handleMinus}>- </button>
+            <HandleRender />
+            <button onClick={handleAdd}>+</button>            
+            <button onClick={HandleReset}>Reset</button>
+            </>
+        )
+}
+
+// PEMBENARAN 
+
+
+    root.render(
+        <>
+        <HomePage />
+        <h1>PROPS REFACTOR </h1>
+        <MainPage />
+        <h1>ELEMEN BERULANG </h1>
+        <MyList />
+        <h1>STATE &HOOKS & EVENT HANDLER</h1>
+        <MyState />
+        </>
+    )
+    
+    //MENAMPILKAN ELEMEN DALAM PENGULANGAN
+    
+
+    </script>
+  </body>
+</html>
